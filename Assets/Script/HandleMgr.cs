@@ -18,15 +18,25 @@ public abstract class HandleMgr{
     }
     
     // 注册回调
-    public static void addHandler(int cmd,int subCmd,  EventHandler<Execute> IHandler){
-        handlers.Add(CmdMgr.getMergeCmd(cmd,subCmd),IHandler); 
+    public static void addHandler(int cmd,int subCmd,  EventHandler<Execute> IHandler)
+    {
+        int MergeCmd = CmdMgr.getMergeCmd(cmd, subCmd);
+        if(!handlers.ContainsKey(MergeCmd))
+        {
+            handlers.Add(MergeCmd, IHandler);
+        }
+        else
+        {
+            Debug.Log($"消息已经注册：cmd:{cmd},subCmd:{subCmd},MergeCmd:{MergeCmd}");
+        }
     }
 
     // 这里为了方便测试就写在一起了
     public static void Hello(object sender, Execute e){
-        var loginVerify = new LoginVerify();
-        loginVerify.MergeFrom(e.data);
-        Debug.Log(loginVerify);
+        // var ReqLoginVerify = new ReqLoginVerify();
+        var ReqLoginVerify = new ResUserInfo();
+        ReqLoginVerify.MergeFrom(e.data);
+        Debug.Log(ReqLoginVerify);
     }
     
     //消息分发

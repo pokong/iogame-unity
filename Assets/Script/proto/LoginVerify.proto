@@ -1,6 +1,6 @@
-syntax="proto3";
+	syntax="proto3";
 
-message LoginVerify {
+message ReqLoginVerify {
 
 
   /** age 测试用的 */
@@ -24,4 +24,13 @@ message LoginVerify {
   /** 登录业务码 */
   int32 loginBizCode = 3;
   
+}
+
+
+message ResUserInfo {
+  int64 id = 1;
+  string name = 2;
+  int32 tempInt = 3;
+  int64 time = 4;
+  int64 time2 = 5;
 }

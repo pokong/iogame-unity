@@ -38,7 +38,9 @@ public class Socket : MonoBehaviour
 
     public void init()
     {
-        HandleMgr.addHandler(1, 0, HandleMgr.Hello);
+        // HandleMgr.addHandler(1, 0, HandleMgr.Hello);
+        HandleMgr.addHandler(3, 1, HandleMgr.Hello);
+        
 
         socket = new WebSocket(wsUrl);
         // 注册回调
@@ -51,7 +53,7 @@ public class Socket : MonoBehaviour
 
     public void OnOpen(object o, OpenEventArgs args)
     {
-        var loginVerify = new LoginVerify
+        var loginVerify = new ReqLoginVerify
         {
             Age = 273676,
             Jwt = "luoyi",
