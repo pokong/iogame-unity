@@ -37,7 +37,15 @@ public abstract class HandleMgr{
 
     //消息分发
     public static void packageHandler( int mergeCmd, ByteString data ) {
-        EventHandler<Execute> handler = handlers[mergeCmd];
-        if (handler != null) handler.Invoke(handler, new Execute(data));
+        if (handlers.ContainsKey(mergeCmd))
+        {
+            EventHandler<Execute> handler = handlers[mergeCmd];
+            if (handler != null) handler.Invoke(handler, new Execute(data));
+        }
+        else
+        {
+            Debug.Log("没有回调方法："+mergeCmd);
+        }
+
     }
 }
